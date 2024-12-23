@@ -1,7 +1,7 @@
 #ifndef INPUT_OUTPUT_H
 #define INPUT_OUTPUT_H
 
-#include "graph.h"
+#include "../include/graph.h"
 
 // 读取图的输入
 void readGraph(Graph *graph);

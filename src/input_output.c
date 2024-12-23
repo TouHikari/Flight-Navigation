@@ -8,7 +8,8 @@
 #include "../include/input_output.h"
 
 // 从用户输入读取图的信息
-void readGraph(Graph *graph) {
+void readGraph(Graph *graph)
+{
     int edges, src, dest, weight;
     printf("请输入顶点数量: ");
     scanf("%d", &graph->vertices);
@@ -18,7 +19,8 @@ void readGraph(Graph *graph) {
     scanf("%d", &edges);
     
     // 循环读取每条边的信息
-    for (int i = 0; i < edges; i++) {
+    for (int i = 0; i < edges; i++)
+    {
         printf("请输入边 (源顶点、目标顶点、权重): ");
         scanf("%d %d %d", &src, &dest, &weight);
         addEdge(graph, src, dest, weight); // 添加边
@@ -26,9 +28,11 @@ void readGraph(Graph *graph) {
 }
 
 // 打印每个顶点的最短距离
-void printShortestPath(int dist[], int n) {
+void printShortestPath(int dist[], int n)
+{
     printf("顶点\t最短距离\n");
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         printf("%d \t%d\n", i, dist[i]); // 打印顶点和对应的最短距离
     }
 }

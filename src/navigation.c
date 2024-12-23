@@ -8,7 +8,8 @@
 #include "../include/navigation.h"
 
 // 示例优化路径函数
-void optimizePath(Graph *graph, int start, int end) {
+void optimizePath(Graph *graph, int start, int end)
+{
     // 这里可以实现更复杂的路径优化逻辑
     printf("优化路径从 %d 到 %d:\n", start, end);
     // 可以调用 Dijkstra 或其他算法实现优化路径

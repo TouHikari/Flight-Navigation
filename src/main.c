@@ -8,7 +8,8 @@
 #include "../include/user_interface.h"
 
 // 主函数
-int main() {
+int main(void)
+{
     userInteraction(); // 启动用户交互
     return 0; // 正常结束
 }

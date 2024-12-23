@@ -1,11 +1,5 @@
-/*
-* File: main.c
-* Date: 2024-12-23
-* Description: 输出时的染色用宏。
-*/
-
-#ifndef _OUTPUT_H_
-#define _OUTPUT_H_
+#ifndef COLORS_H
+#define COLORS_H
 
 // 带颜色的输出
 #define _BLACK(string) "\033[;30m" string "\033[0m"

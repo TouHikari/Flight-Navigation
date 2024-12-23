@@ -10,7 +10,8 @@
 #include "../include/dijkstra.h"
 
 // 用户交互函数
-void userInteraction() {
+void userInteraction(void)
+{
     Graph graph; // 创建图结构
     readGraph(&graph); // 读取图信息
     

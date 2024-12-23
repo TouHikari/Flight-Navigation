@@ -2,7 +2,7 @@
 #define GRAPH_H
 
 #include <limits.h>
-#include "../include/output.h"
+#include "../include/colors.h"
 
 typedef struct {
     int vertices;      // 图中顶点的数量
