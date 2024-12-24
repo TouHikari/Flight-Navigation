@@ -5,6 +5,7 @@
 */
 
 #include <stdio.h>
+#include "../include/welcome.h"
 #include "../include/user_interface.h"
 #include "../include/input_output.h"
 #include "../include/dijkstra.h"
@@ -20,7 +21,8 @@ void displayMenu()
     printf(_YELLOW("|3. 修改边权重\t\t\t|\n"));
     printf(_YELLOW("|4. 显示图的当前状态\t\t|\n"));
     printf(_YELLOW("|5. 退出\t\t\t|\n"));
-    printf(_YELLOW(" ------------------------------- \n"));
+    printf(_YELLOW("|6. 显示欢迎界面\t\t|\n"));
+    printf(_YELLOW(" ------------------------------- \n\n"));
 }
 
 // 用户交互函数
@@ -61,7 +63,8 @@ void userInteraction(void)
                     if (!(cover == 'Y' || cover == 'y'))
                     {
                         printf(_GREEN("您选择不继续输入。\n\n"));
-                        printf(_GREEN("---计算中断！正在返回主菜单...---\n\n"));
+                        printf(_GREEN("------计算中断！正在返回主菜单...------\n\n"));
+                        waitForEnter();
                         break;
                     }
                     
@@ -155,9 +158,14 @@ void userInteraction(void)
 
                 return;
 
+            case '6':
+                // 显示欢迎界面
+                displayWelcomeMessage();
+                break;
+
             // 处理无效输入
             default:
-                printf(_RED("无效的选择，请重新输入。\n"));
+                printf(_RED("无效的选择，请重新输入。\n\n"));
 
         }
     }
