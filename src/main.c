@@ -17,8 +17,11 @@ int main(void)
     system("CHCP 65001");
     #endif
 
-    userInteraction(); // 启动用户交互
-    printf(_GREEN("程序退出。"));
+    // 启动用户交互
+    userInteraction();
+
+    printf(_GREEN("程序退出。按回车键关闭窗口..."));
+    getchar();
     
     return 0; // 正常结束
 }

@@ -54,6 +54,7 @@ void replanPath(Graph *graph, int src, int dest, int newWeight)
 
     printf(_YELLOW("边") " (%d, %d) " _YELLOW("的权重已更新为 ") "%d。\n",
            src, dest, newWeight);
+    printf("\n");
 }
 
 // 打印优化后的路径
@@ -111,4 +112,5 @@ void printPathStats(int dist[], int path[], int end)
         count -= 1; 
         printf(_YELLOW("经过的节点数量: ") "%d\n", count);
     }
+    printf("\n");
 }

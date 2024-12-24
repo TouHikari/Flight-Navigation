@@ -13,11 +13,14 @@
 void initGraph(Graph *graph, int vertices)
 {
     graph->vertices = vertices;
+
     // 为邻接矩阵分配内存
     graph->adjMatrix = (int **)malloc(vertices * sizeof(int *));
+
     for (int i = 0; i < vertices; i++)
     {
         graph->adjMatrix[i] = (int *)malloc(vertices * sizeof(int));
+
         // 初始化邻接矩阵，0表示自环，其他为无穷大
         for (int j = 0; j < vertices; j++)
         {
@@ -29,8 +32,10 @@ void initGraph(Graph *graph, int vertices)
 // 添加边到图中
 void addEdge(Graph *graph, int src, int dest, int weight)
 {
-    graph->adjMatrix[src][dest] = weight; // 设置源到目标的边权重
-    graph->adjMatrix[dest][src] = weight; // 无向图，反向边也要设置
+    // 设置源到目标的边权重
+    graph->adjMatrix[src][dest] = weight;
+    // 无向图，反向边也要设置
+    graph->adjMatrix[dest][src] = weight;
 }
 
 // 释放图的内存
@@ -38,9 +43,12 @@ void freeGraph(Graph *graph)
 {
     for (int i = 0; i < graph->vertices; i++)
     {
-        free(graph->adjMatrix[i]); // 释放每一行
+        // 释放每一行
+        free(graph->adjMatrix[i]);
     }
-    free(graph->adjMatrix); // 释放邻接矩阵的指针
+
+    // 释放邻接矩阵的指针
+    free(graph->adjMatrix);
 }
 
 // 打印图的 ASCII 可视化
@@ -59,18 +67,23 @@ void printGraph(Graph *graph)
     // 打印矩阵内容
     for (int i = 0; i < graph->vertices; i++)
     {
-        printf("%d\t", i); // 打印行头
+        // 打印行头
+        printf("%d\t", i);
+
         for (int j = 0; j < graph->vertices; j++)
         {
             int weight = graph->adjMatrix[i][j];
+
             if (weight == INT_MAX)
             {
-                printf(_BLUE("∞\t")); // 输出蓝色的∞
+                // 输出蓝色的∞
+                printf(_BLUE("∞\t"));
             }
             else
             {
                 // 计算所有边的最大值
                 int maxWeight = 0;
+
                 for (int k = 0; k < graph->vertices; k++)
                 {
                     if (graph->adjMatrix[i][k] != INT_MAX &&
@@ -79,18 +92,22 @@ void printGraph(Graph *graph)
                         maxWeight = graph->adjMatrix[i][k];
                     }
                 }
+
                 // 确定颜色
                 if (weight <= maxWeight * 0.33)
                 {
-                    printf(_GREEN("%d\t"), weight); // 绿色
+                    // 0 ~ 33%：绿色
+                    printf(_GREEN("%d\t"), weight);
                 }
                 else if (weight <= maxWeight * 0.66)
                 {
-                    printf(_YELLOW("%d\t"), weight); // 黄色
+                    // 33% ~ 66%：黄色
+                    printf(_YELLOW("%d\t"), weight);
                 }
                 else
                 {
-                    printf(_RED("%d\t"), weight); // 红色
+                    // 66% ~ 100%：红色
+                    printf(_RED("%d\t"), weight);
                 }
             }
         }
@@ -101,18 +118,24 @@ void printGraph(Graph *graph)
     printf(_YELLOW("ASCII 图示:\n"));
     for (int i = 0; i < graph->vertices; i++)
     {
-        printf("节点 " _YELLOW("%d") ": ", i); // 打印节点编号
+        // 打印节点编号
+        printf("节点 " _YELLOW("%d") ": ", i);
+
         int hasEdge = 0; // 标识当前节点是否有边
         for (int j = 0; j < graph->vertices; j++)
         {
-            if (graph->adjMatrix[i][j] != INT_MAX && i != j) // 确保非自环
+            // 确保非自环
+            if (graph->adjMatrix[i][j] != INT_MAX && i != j)
             {
                 if (hasEdge)
                 {
-                    printf(" "); // 边之间用空格分隔
+                    // 边之间用空格分隔
+                    printf(" ");
                 }
+
                 // 打印边和目标节点
                 printf("--[%d]--> " _YELLOW("%d"), graph->adjMatrix[i][j], j);
+
                 hasEdge = 1; // 标记有边
             }
         }

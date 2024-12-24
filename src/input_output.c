@@ -11,9 +11,12 @@
 void readGraph(Graph *graph)
 {
     int edges, src, dest, weight;
+
     printf(_RED("请输入顶点数量: "));
     scanf("%d", &graph->vertices);
-    initGraph(graph, graph->vertices); // 初始化图
+
+    // 初始化图
+    initGraph(graph, graph->vertices);
     
     printf(_RED("请输入边的数量: "));
     scanf("%d", &edges);
@@ -23,19 +26,24 @@ void readGraph(Graph *graph)
     {
         printf(_RED("请输入第%d个边 (源顶点、目标顶点、权重): "), i + 1);
         scanf("%d %d %d", &src, &dest, &weight);
-        addEdge(graph, src, dest, weight); // 添加边
+        // 添加边
+        addEdge(graph, src, dest, weight);
         
         // 输出更新后的图
-        printGraph(graph); // 显示当前图的 ASCII 视图
+        // 显示当前图的 ASCII 视图
+        printGraph(graph);
     }
+
 }
 
 // 打印每个顶点的最短距离
 void printShortestPath(int dist[], int n)
 {
     printf(_YELLOW("顶点\t最短距离\n"));
+    
     for (int i = 0; i < n; i++)
     {
-        printf("%d \t%d\n", i, dist[i]); // 打印顶点和对应的最短距离
+        // 打印顶点和对应的最短距离
+        printf("%d \t%d\n", i, dist[i]); 
     }
 }
