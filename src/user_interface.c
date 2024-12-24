@@ -14,7 +14,7 @@
 void displayMenu()
 {
     printf(_YELLOW(" ------------------------------- \n"));
-    printf(_YELLOW("|\t主菜单:\t\t\t|\n"));
+    printf(_YELLOW("|\t    主菜单:    \t\t|\n"));
     printf(_YELLOW("|1. 输入图信息\t\t\t|\n"));
     printf(_YELLOW("|2. 计算最短路径\t\t|\n"));
     printf(_YELLOW("|3. 修改边权重\t\t\t|\n"));
@@ -46,27 +46,75 @@ void userInteraction(void)
         {
             case '1':
                 printf(_GREEN("\n-----------开始输入图信息！-----------\n\n"));
+
+                // 如果已存在输入过的图结构
+                if (ifHasGraph)
+                {
+                    // 是否覆盖的选项
+                    char cover;
+                    
+                    printf(_RED("已经存在输入过的图结构！继续输入将覆盖！\n"));
+                    printf(_RED("是否继续？(y/n): "));
+                    scanf("%c", &cover);
+                    emptyInputBuffer();
+
+                    if (!(cover == 'Y' || cover == 'y'))
+                    {
+                        printf(_GREEN("您选择不继续输入。\n\n"));
+                        printf(_GREEN("---计算中断！正在返回主菜单...---\n\n"));
+                        break;
+                    }
+                    
+                }
+                
+                // 输入图结构信息
                 ifHasGraph = 1;
                 readGraph(&graph);
                 emptyInputBuffer();
                 printf(_GREEN("---图信息输入完成！正在返回主菜单...---\n\n"));
+                waitForEnter();
                 break;
 
             case '2':
             {
                 printf(_GREEN("\n-------开始计算最短路径！-------\n\n"));
+
+                // 处理未输入图信息时导致的错误
+                if (!ifHasGraph)
+                {
+                    printf(_RED("错误！您还没有输入图信息！\n\n"));
+                    printf(_GREEN("---计算中断！正在返回主菜单...---\n\n"));
+                    waitForEnter();
+                    // 退出本次 switch
+                    break;
+                }
+                
+                // 无错误情况
                 int start, end;
                 printf(_RED("请输入起点和终点 (用空格分隔): "));
                 scanf("%d %d", &start, &end);
                 emptyInputBuffer();
                 optimizePath(&graph, start, end);
                 printf(_GREEN("---计算完成！正在返回主菜单...---\n\n"));
+                waitForEnter();
                 break;
             }
 
             case '3':
             {
                 printf(_GREEN("\n--------开始修改边权重！--------\n\n"));
+
+                // 处理未输入图信息时导致的错误
+                if (!ifHasGraph)
+                {
+                    printf(_RED("错误！您还没有输入图信息！\n\n"));
+                    printf(_GREEN("---计算中断！正在返回主菜单...---\n\n"));
+                    waitForEnter();
+                    // 退出本次 switch
+                    break;
+                }
+                
+                // 无错误情况
                 char modifyChoice;
                 int src, dest, newWeight;
                 printf(_RED("请输入要修改的边的起点、终点和新权重: "));
@@ -74,21 +122,37 @@ void userInteraction(void)
                 emptyInputBuffer();
                 replanPath(&graph, src, dest, newWeight);
                 printf(_GREEN("---更新完成！正在返回主菜单...---\n\n"));
+                waitForEnter();
                 break;
             }
 
             case '4':
                 printf(_GREEN("\n-----开始显示图的当前状态！-----\n\n"));
+
+                // 处理未输入图信息时导致的错误
+                if (!ifHasGraph)
+                {
+                    printf(_RED("错误！您还没有输入图信息！\n\n"));
+                    printf(_GREEN("---计算中断！正在返回主菜单...---\n\n"));
+                    waitForEnter();
+                    // 退出本次 switch
+                    break;
+                }
+                
+                // 无错误情况
                 printGraph(&graph);
                 printf(_GREEN("---输出成功！正在返回主菜单...---\n\n"));
+                waitForEnter();
                 break;
 
             case '5':
+                // 处理未输入图信息时导致的错误
                 if (ifHasGraph)
                 {
                     freeGraph(&graph);
                     printf(_GREEN("释放内存成功！\n"));
                 }
+
                 return;
 
             // 处理无效输入
@@ -107,4 +171,11 @@ void emptyInputBuffer(void)
     {
         continue;
     }
+}
+
+// 等待用户回车
+void waitForEnter(void)
+{
+    printf(_GREEN("按回车键继续...\n"));
+    getchar(); // 等待用户输入
 }

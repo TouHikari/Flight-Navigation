@@ -5,5 +5,7 @@
 void userInteraction(void);
 // 清空输入缓冲区
 void emptyInputBuffer(void);
+// 等待用户回车
+void waitForEnter(void);
 
 #endif

@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <windows.h>
+#include "../include/welcome.h"
 #include "../include/user_interface.h"
 #include "../include/colors.h"
 
@@ -17,11 +18,14 @@ int main(void)
     system("CHCP 65001");
     #endif
 
+    // 显示欢迎信息
+    displayWelcomeMessage();
+
     // 启动用户交互
     userInteraction();
 
-    printf(_GREEN("程序退出。按回车键关闭窗口..."));
+    printf(_GREEN("程序退出。按回车键关闭窗口...\n"));
     getchar();
-    
+
     return 0; // 正常结束
 }
