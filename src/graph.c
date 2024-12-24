@@ -1,7 +1,7 @@
 /*
-* File: dijkstra.c
+* File: graph.c
 * Date: 2024-12-23
-* Description: 定义图的数据结构，使用邻接矩阵表示航班之间的连接。
+* Description: 定义图的数据结构，使用邻接矩阵表示航班之间的连接，打印 ASCII 图示。
 */
 
 #include <stdio.h>
@@ -46,7 +46,7 @@ void freeGraph(Graph *graph)
 // 打印图的 ASCII 可视化
 void printGraph(Graph *graph)
 {
-    printf("图的邻接矩阵表示:\n");
+    printf(_YELLOW("图的邻接矩阵表示:\n"));
 
     // 打印表头
     printf("\t");
@@ -96,4 +96,28 @@ void printGraph(Graph *graph)
         }
         printf("\n");
     }
+
+    // 打印 ASCII 图
+    printf(_YELLOW("ASCII 图示:\n"));
+    for (int i = 0; i < graph->vertices; i++)
+    {
+        printf("节点 " _YELLOW("%d") ": ", i); // 打印节点编号
+        int hasEdge = 0; // 标识当前节点是否有边
+        for (int j = 0; j < graph->vertices; j++)
+        {
+            if (graph->adjMatrix[i][j] != INT_MAX && i != j) // 确保非自环
+            {
+                if (hasEdge)
+                {
+                    printf(" "); // 边之间用空格分隔
+                }
+                // 打印边和目标节点
+                printf("--[%d]--> " _YELLOW("%d"), graph->adjMatrix[i][j], j);
+                hasEdge = 1; // 标记有边
+            }
+        }
+        printf("\n");
+    }
+
+    printf("\n");
 }
